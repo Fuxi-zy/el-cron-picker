@@ -1,6 +1,6 @@
 {
   "name": "@fuxishi/el-cron-picker",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "license": "MIT",
   "description": "vue3 element-plus cron表达式生成器",
   "publishConfig": {
