@@ -1,0 +1,53 @@
+{
+  "name": "@fuxishi/el-cron-picker",
+  "version": "1.1.0",
+  "license": "MIT",
+  "description": "vue3 element-plus cron表达式生成器",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "pub": "npm publish --registry=https://registry.npmjs.com",
+    "dep": "node -e \"const version = process.argv[1]; if (!version) { console.error('请提供要废弃的版本号，例如: npm run deprecate 1.0.4'); process.exit(1); } require('child_process').execSync(`npm deprecate @fuxishi/el-cron-picker@${version} \\\"此包已弃用,请更新依赖包\\\" --registry=https://registry.npmjs.com`, { stdio: 'inherit' });\""
+  },
+  "author": {
+    "name": "fuxishi",
+    "email": "zhangzjx1422@163.com"
+  },
+  "main": "./dist/el-cron-picker.umd.cjs",
+  "module": "./dist/el-cron-picker.es.js",
+  "types": "./dist/el-cron-picker.d.ts",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "dependencies": {
+    "croner": "^9.1.0",
+    "element-plus": "^2.11.7",
+    "vue": "^3.5.22"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/tsconfig": "^0.8.1",
+    "rollup-plugin-dts": "^6.2.3",
+    "sass": "^1.93.3",
+    "sass-loader": "^16.0.6",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.1.14",
+    "vite-plugin-dts": "^4.5.4",
+    "vue-tsc": "^3.1.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "npm:rolldown-vite@7.1.14"
+    },
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "vue-demi"
+    ]
+  }
+}
