@@ -1,6 +1,6 @@
 # cron-picker
 
-vue3 element-plus cron 表达式生成器 正式版本 verision 1.1.1
+vue3 element-plus cron 表达式生成器
 
 # 使用方式
 

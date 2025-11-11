@@ -5,7 +5,14 @@
   "description": "vue3 element-plus cron表达式生成器",
   "publishConfig": {
     "access": "public"
-  },
+  },	
+  "bugs": {
+		"url": "https://github.com/kelektiv/node-cron/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Fuxi-zy/el-cron-picker"
+	},
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc -b && vite build",
@@ -15,7 +22,8 @@
   },
   "author": {
     "name": "fuxishi",
-    "email": "zhangzjx1422@163.com"
+    "email": "zhangzjx1422@163.com",
+    "url": "https://github.com/fuxishi"
   },
   "main": "./dist/el-cron-picker.umd.cjs",
   "module": "./dist/el-cron-picker.es.js",

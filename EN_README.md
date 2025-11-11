@@ -77,12 +77,15 @@ For example:
   <ElCronConfig v-model="cron" :language="lang" />
 </template>
 <script setup lang="ts">
-  import { ref } from "vue"
-  import { ElCronPicker,ElCronConfig } from "@fuxishi/el-cron-picker"
-  const lang = {
-    ......
-  }
-  const cron = ref("* * * * * ?")
+  "bugs": {
+  	"url": "https://github.com/kelektiv/node-cron/issues"
+  },
+   import { ref } from "vue"
+   import { ElCronPicker,ElCronConfig } from "@fuxishi/el-cron-picker"
+   const lang = {
+     ......
+   }
+   const cron = ref("* * * * * ?")
 </script>
 ```
 
