@@ -131,6 +131,11 @@ import { zh } from "@fuxishi/el-cron-picker";
 | update:numberCount | -           | 值改变           |
 | executionError     | error:Error | 执行错误时触发   |
 
+## 示例图片
+
+![示例图片 1](https://github.com/Fuxi-zy/el-cron-picker/blob/main/docs/image/cron.png?raw=true)
+![示例图片 2](https://github.com/Fuxi-zy/el-cron-picker/blob/main/docs/image/quick.png?raw=true)
+
 # 更新日志
 
 | 版本号 | 更新内容                                                                                                                                                                                                                                    | 更新时间   |

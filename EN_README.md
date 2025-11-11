@@ -131,7 +131,12 @@ For example:
 | update:numberCount | -           | Subnumerical change                      |
 | executionError     | error:Error | Triggered when an execution error occurs |
 
-# 更新日志
+## Sample picture
+
+![Sample picture 1](https://github.com/Fuxi-zy/el-cron-picker/blob/main/docs/image/cron.png?raw=true)
+![Sample picture 2](https://github.com/Fuxi-zy/el-cron-picker/blob/main/docs/image/quick.png?raw=true)
+
+# Update log
 
 | Version number | Updated content                                                                                                                                                                                                                                                                                                                                                                                                                             | Updated time |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
