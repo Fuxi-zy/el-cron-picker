@@ -17,26 +17,26 @@ npm i @fuxishi/el-cron-picker
 ## 全局引入
 
 ```ts
-import { createApp } from "vue";
-import App from "./App.vue";
-import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
+import { createApp } from "vue"
+import App from "./App.vue"
+import ElementPlus from "element-plus"
+import "element-plus/dist/index.css"
 
 // 全局引入
-import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker";
-import "@fuxishi/el-cron-picker/dist/el-cron-picker.css";
+import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker"
+import "@fuxishi/el-cron-picker/dist/el-cron-picker.css"
 
-const app = createApp(App);
-app.use(ElementPlus);
-app.use(ElCronPicker);
-app.mount("#app");
+const app = createApp(App)
+app.use(ElementPlus)
+app.use(ElCronPicker)
+app.mount("#app")
 ```
 
 ## 局部引入
 
 ```ts
-import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker";
-import "@fuxishi/el-cron-picker/dist/el-cron-picker.css";
+import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker"
+import "@fuxishi/el-cron-picker/dist/el-cron-picker.css"
 ```
 
 ## 示例
@@ -49,11 +49,11 @@ import "@fuxishi/el-cron-picker/dist/el-cron-picker.css";
   <el-cron-config v-model="cron" v-model:numberCount="numberCount" />
 </template>
 <script setup lang="ts">
-  import { ref } from "vue";
-  import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker";
-  import "@fuxishi/el-cron-picker/dist/el-cron-picker.css";
-  const cron = ref("* * * * * ?");
-  const numberCount = ref(50);
+  import { ref } from "vue"
+  import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker"
+  import "@fuxishi/el-cron-picker/dist/el-cron-picker.css"
+  const cron = ref("* * * * * ?")
+  const numberCount = ref(50)
 </script>
 ```
 
@@ -65,7 +65,7 @@ import "@fuxishi/el-cron-picker/dist/el-cron-picker.css";
 例如:
 
 ```ts
-import { zh } from "@fuxishi/el-cron-picker";
+import { zh } from "@fuxishi/el-cron-picker"
 ```
 
 也可自定义
