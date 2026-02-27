@@ -37,12 +37,25 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 保存 dist 目录
           cp -r dist /tmp/dist-build
+          
+          # 创建孤儿分支
           git checkout --orphan gh-clean-temp
-          git rm -rf . 2>/dev/null || true
-          rm -rf * .* 2>/dev/null || true
+          
+          # 删除所有已跟踪的文件（保留 .git）
+          git rm -rf .
+          
+          # 复制构建产物
           cp -r /tmp/dist-build/* .
+          
+          # 查看当前文件
           ls -la
+          
+          # 提交
           git add -A
           git commit -m "Deploy to GitHub Pages - $(date '+%Y-%m-%d %H:%M:%S')"
+          
+          # 推送到 gh-clean-pages 分支
           git push -f origin HEAD:gh-clean-pages
