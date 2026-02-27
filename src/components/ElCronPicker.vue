@@ -120,8 +120,8 @@
     :width
     v-if="type === 'dialog'"
     align-center
-    :close-on-click-modal="false"
-    :close-on-press-escape="false"
+    :close-on-click-modal="closeOnClickModal"
+    :close-on-press-escape="closeOnClickModal"
   >
     <template #default>
       <el-cron-config
@@ -148,8 +148,8 @@
     v-if="type === 'drawer'"
     align-center
     :size="width"
-    :close-on-click-modal="false"
-    :close-on-press-escape="false"
+    :close-on-click-modal="closeOnClickModal"
+    :close-on-press-escape="closeOnClickModal"
     header-class="el-drawer-header-custom"
   >
     <template #default>
@@ -163,7 +163,7 @@
     <template #footer>
       <el-button
         type="primary"
-        @click="dialogVisible = false"
+        @click="drawerVisible = false"
         size="small"
         round
         >{{ language.ElCronPicker.cancel }}</el-button
@@ -186,6 +186,7 @@ const props = withDefaults(defineProps<ElCronPickerProps>(), {
   placeholder: "",
   width: "800px",
   language: () => zhCn,
+  closeOnClickModal: true,
 });
 const emits = defineEmits(["update:modelValue", "executionError"]);
 const numberCount = ref(100);

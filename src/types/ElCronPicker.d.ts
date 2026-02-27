@@ -26,4 +26,5 @@ export interface ElCronPickerProps {
   placeholder?: string; // 占位符
   width?: string; // 宽度 type表示的 popover dialog drawer的宽度
   language?: langType;
+  closeOnClickModal?: boolean; // 是否允许点击模态框关闭弹窗/抽屉
 }
