@@ -17,40 +17,44 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Build demo site
-        run: npx vite build --config vite.gh-clean-pages.config.ts
+        run: npx vite build --config vite.gh-pages.config.ts
 
       - name: Show dist contents
-        run: ls -la dist/ && ls -la dist/assets/
+        run: ls -la dist/
 
-      - name: Deploy to gh-clean-pages
+      - name: Deploy to gh-pages branch
         run: |
-          # 保存 dist 目录到临时位置
-          cp -r dist /tmp/dist-build
-
-          # 切换到 gh-clean-pages 分支（或创建孤儿分支）
-          git checkout --orphan gh-clean-pages 2>/dev/null || git checkout gh-clean-pages
-
-          # 清空所有文件
-          git rm -rf . 2>/dev/null || true
-          rm -rf * .* 2>/dev/null || true
-
-          # 复制构建产物
-          cp -r /tmp/dist-build/* .
-
-          # 提交并推送
-          git add -A
+          # 配置 git
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 保存 dist 目录
+          cp -r dist /tmp/dist-build
+          
+          # 删除所有文件
+          rm -rf * .* 2>/dev/null || true
+          
+          # 复制构建产物
+          cp -r /tmp/dist-build/* .
+          
+          # 查看当前文件
+          ls -la
+          
+          # 提交
+          git add -A
           git commit -m "Deploy to GitHub Pages - $(date '+%Y-%m-%d %H:%M:%S')"
-          git push -f origin gh-clean-pages
+          
+          # 推送到 gh-pages 分支
+          git push -f origin HEAD:gh-pages
