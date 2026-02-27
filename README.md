@@ -105,6 +105,7 @@ import { zh } from "@fuxishi/el-cron-picker"
 | placeholder         | 输入框占位符                                  | string                                             | -         |
 | width               | 宽度 type 表示的 popover dialog drawer 的宽度 | string                                             | -         |
 | language            | 语言包                                        | [langType](./dist/types/lang.d.ts)                 | -         |
+| closeOnClickModal   | 是否允许点击模态框关闭弹窗/抽屉               | boolean                                            | true      |
 
 ## ElCronConfig 配置项
 
@@ -131,6 +132,25 @@ import { zh } from "@fuxishi/el-cron-picker"
 | update:numberCount | -           | 值改变           |
 | executionError     | error:Error | 执行错误时触发   |
 
+## 功能说明
+
+### Dialog/Drawer 输入框
+
+当 `type` 为 `dialog` 或 `drawer` 时，弹窗/抽屉内会显示一个可编辑的输入框，可以直接输入 Cron 表达式。输入框的值会与 `v-model` 双向绑定同步更新。
+
+```html
+<template>
+  <!-- 使用 dialog 类型，带输入框 -->
+  <el-cron-picker v-model="cron" type="dialog" />
+  
+  <!-- 使用 drawer 类型，带输入框 -->
+  <el-cron-picker v-model="cron" type="drawer" />
+  
+  <!-- 禁止点击模态框关闭 -->
+  <el-cron-picker v-model="cron" type="drawer" :close-on-click-modal="false" />
+</template>
+```
+
 ## 示例图片
 
 ![示例图片 1](https://github.com/Fuxi-zy/el-cron-picker/blob/main/docs/image/cron.png?raw=true)
@@ -149,5 +169,7 @@ import { zh } from "@fuxishi/el-cron-picker"
 | 1.0.6  | 修复周期情况下如果出现例如"MON-FRI"变为"NAN-NAN"问题, 解决如果是已经输入到周的时候无法继续输入空格或删除最后方空格 解决月份如果是如的是类似 JAN 转换为 NAN 的问题 ,修复周部分的第 n 周的星期 n 转换错误问题, 解决年部分用"\/"分割报错的情况 | 2025-11-06 |
 | 1.1.0  | 新增语言包配置                                                                                                                                                                                                                              | 2025-11-07 |
 | 1.1.1  | ①. 新增 executionError 执行错误事件 ②. isCron 正则校验增强 解决日参数 W LW L 错误返回 false 问题 ③. 最近运行事件计算方式如果 cron 表达式不满足条件自动清空最近运行                                                                          | 2025-11-10 |
+| 1.1.2  | ①. 修复 drawer 取消按钮无反应问题 ②. 新增 closeOnClickModal 参数控制是否允许点击模态框关闭弹窗/抽屉                                                                                                                                          | 2025-11-11 |
+| 1.1.3  | ①. 在 dialog/drawer 中添加可输入的 Cron 表达式输入框，与 v-model 双向绑定 ②. 更新语言包类型定义                                                                                                                                            | 2025-11-11 |
 
 # 如遇到错误或什么问题 可邮箱zhangzjx1422@163.com联系

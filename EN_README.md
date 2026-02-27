@@ -77,25 +77,22 @@ For example:
   <ElCronConfig v-model="cron" :language="lang" />
 </template>
 <script setup lang="ts">
-  "bugs": {
-  	"url": "https://github.com/kelektiv/node-cron/issues"
-  },
-   import { ref } from "vue"
-   import { ElCronPicker,ElCronConfig } from "@fuxishi/el-cron-picker"
-   const lang = {
-     ......
-   }
-   const cron = ref("* * * * * ?")
+  import { ref } from "vue"
+  import { ElCronPicker,ElCronConfig } from "@fuxishi/el-cron-picker"
+  const lang = {
+    ......
+  }
+  const cron = ref("* * * * * ?")
 </script>
 ```
 
 ## ElCronPickerType
 
-| 值      | 说明   |
-| ------- | ------ |
-| popover | 弹出框 |
-| dialog  | 对话框 |
-| drawer  | 抽屉   |
+| Value    | Description      |
+| -------- | ---------------- |
+| popover  | Popover          |
+| dialog   | Dialog           |
+| drawer   | Drawer           |
 
 ## ElCronPicker configuration item
 
@@ -108,6 +105,7 @@ For example:
 | placeholder         | Input box placeholder                                            | string                                             | -             |
 | width               | The width type represents the width of the popover dialog drawer | string                                             | -             |
 | language            | Language pack                                                    | [langType](./dist/types/lang.d.ts)                 | -             |
+| closeOnClickModal   | Whether to allow clicking on the modal to close the dialog/drawer | boolean                                           | true          |
 
 ## ElCronConfig configuration item
 
@@ -134,6 +132,25 @@ For example:
 | update:numberCount | -           | Subnumerical change                      |
 | executionError     | error:Error | Triggered when an execution error occurs |
 
+## Feature Description
+
+### Dialog/Drawer Input Box
+
+When `type` is `dialog` or `drawer`, an editable input box will be displayed in the dialog/drawer, allowing you to directly enter the Cron expression. The value of the input box will be two-way bound with `v-model` and synchronized.
+
+```html
+<template>
+  <!-- Use dialog type with input box -->
+  <el-cron-picker v-model="cron" type="dialog" />
+  
+  <!-- Use drawer type with input box -->
+  <el-cron-picker v-model="cron" type="drawer" />
+  
+  <!-- Disable closing by clicking on modal -->
+  <el-cron-picker v-model="cron" type="drawer" :close-on-click-modal="false" />
+</template>
+```
+
 ## Sample picture
 
 ![Sample picture 1](https://github.com/Fuxi-zy/el-cron-picker/blob/main/docs/image/cron.png?raw=true)
@@ -152,5 +169,7 @@ For example:
 | 1.0.6          | In the case of the repair cycle, if problems such as "MON-FRI" changing to "NAN-NAN" occur, Fixed the issue of being unable to continue inputting Spaces or deleting the last space when the week has already been entered. Resolved the problem of converting JAN to NAN when the month is similar. Fixed the error of converting the NTH week of the week in the week section. Resolved the error of splitting the year section with "\/" | 2025-11-06   |
 | 1.1.0          | New language pack configuration added                                                                                                                                                                                                                                                                                                                                                                                                       | 2025-11-07   |
 | 1.1.1          | ①. A new executionError execution error event has been added. ②. The isCron regular check has been enhanced to solve the problem of the daily parameter W LW L error returning false. ③ The calculation method for the most recent run event is to automatically clear the most recent run if the cron expression does not meet the conditions                                                                                              | 2025-11-10   |
+| 1.1.2          | ①. Fixed the issue where the drawer cancel button was not responding. ②. Added closeOnClickModal parameter to control whether clicking on the modal can close the dialog/drawer                                                                                                                                                                                                                                                             | 2025-11-11   |
+| 1.1.3          | ①. Added an editable Cron expression input box in dialog/drawer, two-way binding with v-model. ②. Updated language pack type definition                                                                                                                                                                                                                                                                                                    | 2025-11-11   |
 
 # If you encounter any errors or problems, please contact us at zhangzjx1422@163.com or issues
