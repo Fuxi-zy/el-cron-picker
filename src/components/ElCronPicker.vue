@@ -124,6 +124,18 @@
     :close-on-press-escape="closeOnClickModal"
   >
     <template #default>
+      <div class="cron-input-wrapper">
+        <el-input
+          v-model="inputValue"
+          :placeholder="language.ElCronPicker.CronExpressionPlaceholder || 'Please enter cron expression'"
+          clearable
+          @input="handleInputChange"
+        >
+          <template #prepend>
+            <span>{{ language.ElCronPicker.CronExpression || 'Cron Expression' }}</span>
+          </template>
+        </el-input>
+      </div>
       <el-cron-config
         v-model="modelValue"
         v-model:number-count="numberCount"
@@ -153,6 +165,18 @@
     header-class="el-drawer-header-custom"
   >
     <template #default>
+      <div class="cron-input-wrapper">
+        <el-input
+          v-model="inputValue"
+          :placeholder="language.ElCronPicker.CronExpressionPlaceholder || 'Please enter cron expression'"
+          clearable
+          @input="handleInputChange"
+        >
+          <template #prepend>
+            <span>{{ language.ElCronPicker.CronExpression || 'Cron Expression' }}</span>
+          </template>
+        </el-input>
+      </div>
       <el-cron-config
         v-model="modelValue"
         v-model:number-count="numberCount"
@@ -173,7 +197,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, isVNode, ref } from "vue";
+import { computed, isVNode, ref, watch } from "vue";
 import { isCron, isEmpty, isObject, isSvg } from "../utils/is";
 import { type ElCronPickerProps } from "../types/ElCronPicker";
 import ElCronConfig from "./ElCronConfig.vue";
@@ -192,6 +216,9 @@ const emits = defineEmits(["update:modelValue", "executionError"]);
 const numberCount = ref(100);
 // 验证
 const verify = ref(false);
+// 输入框值
+const inputValue = ref(props.modelValue);
+
 const placeholder = computed(() => {
   if (props.placeholder) {
     return props.placeholder;
@@ -219,6 +246,19 @@ const modelValue = computed({
     emits("update:modelValue", val);
   },
 });
+
+// 同步 modelValue 到 inputValue
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    inputValue.value = newVal;
+  }
+);
+
+// 处理输入框变化
+function handleInputChange(val: string) {
+  emits("update:modelValue", val);
+}
 
 // popover
 const popoverVisible = ref(false);
@@ -252,6 +292,9 @@ function executionError(error: Error) {
     width: 16px;
     height: 16px;
   }
+}
+.cron-input-wrapper {
+  margin-bottom: 16px;
 }
 </style>
 <style>

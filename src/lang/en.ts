@@ -22,6 +22,7 @@ export const en: langType = {
       "Cron expression format error, please reconfigure Cron expression",
     PleaseConfigureThroughPanel:
       "Please configure Cron expression through panel",
+    CronExpressionPlaceholder: "Please enter cron expression",
   },
   timers: {
     seconds: "seconds",

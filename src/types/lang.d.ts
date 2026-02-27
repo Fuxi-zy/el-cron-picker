@@ -14,6 +14,7 @@ export interface langType {
     CronConfig: string;
     CronFormatError: string;
     PleaseConfigureThroughPanel: string;
+    CronExpressionPlaceholder?: string;
   };
   timers: {
     seconds: string;

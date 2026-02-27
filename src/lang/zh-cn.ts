@@ -19,6 +19,7 @@ export const zhCn: langType = {
     CronConfig: "Cron配置",
     CronFormatError: "Cron表达式格式错误, 请重新配置Cron表达式",
     PleaseConfigureThroughPanel: "请通过面板配置Cron表达式",
+    CronExpressionPlaceholder: "请输入Cron表达式",
   },
   timers: {
     seconds: "秒",
