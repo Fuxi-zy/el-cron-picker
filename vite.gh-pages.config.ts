@@ -10,14 +10,5 @@ export default defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: true,
-    rollupOptions: {
-      // 不 external vue 和 element-plus，需要打包进去
-      output: {
-        manualChunks: {
-          'element-plus': ['element-plus'],
-          'vue': ['vue'],
-        }
-      }
-    }
   },
 })
