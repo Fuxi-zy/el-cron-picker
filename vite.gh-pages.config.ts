@@ -6,7 +6,7 @@ import vue from "@vitejs/plugin-vue"
 export default defineConfig({
   plugins: [vue()],
   base: "/el-cron-picker/",
-  // 不设置 build.lib，使用默认的应用模式构建
+  // 不设置 build.lib，使用默认的应用模式构建 修改测试
   build: {
     outDir: "dist",
     emptyOutDir: true,
