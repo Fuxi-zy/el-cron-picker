@@ -25,3 +25,5 @@ dist-ssr
 *.sw?
 
 package-lock.json
+
+demo-dist

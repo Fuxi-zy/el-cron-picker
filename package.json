@@ -16,6 +16,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vue-tsc -b && vite build",
+    "build:demo": "vite build --config vite.demo.config.ts",
     "preview": "vite preview",
     "pub": "npm publish --registry=https://registry.npmjs.com",
     "dep": "node -e \"const version = process.argv[1]; if (!version) { console.error('请提供要废弃的版本号，例如: npm run deprecate 1.0.4'); process.exit(1); } require('child_process').execSync(`npm deprecate @fuxishi/el-cron-picker@${version} \\\"此包已弃用,请更新依赖包\\\" --registry=https://registry.npmjs.com`, { stdio: 'inherit' });\""
