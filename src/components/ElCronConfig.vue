@@ -729,7 +729,8 @@ const nextRunTimes = computed(() => {
     if (!cronExpression.value) return [];
     try {
       const job = new Cron(cronExpression.value.toString().trim(), {
-        legacyMode: false,
+        domAndDow: true,
+        sloppyRanges: true,
       });
       const times = job
         .nextRuns(props.numberCount)

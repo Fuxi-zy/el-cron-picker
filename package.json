@@ -33,7 +33,7 @@
   ],
   "type": "module",
   "dependencies": {
-    "croner": "^9.1.0",
+    "croner": "^10.0.1",
     "element-plus": "^2.11.7",
     "vue": "^3.5.22"
   },
