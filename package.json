@@ -1,6 +1,6 @@
 {
   "name": "@fuxishi/el-cron-picker",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "license": "MIT",
   "description": "vue3 element-plus cron表达式生成器",
   "publishConfig": {
@@ -34,24 +34,24 @@
   "type": "module",
   "dependencies": {
     "croner": "^10.0.1",
-    "element-plus": "^2.11.7",
-    "vue": "^3.5.22"
+    "element-plus": "^2.13.6",
+    "vue": "^3.5.31"
   },
   "devDependencies": {
-    "@types/node": "^24.6.0",
-    "@vitejs/plugin-vue": "^6.0.1",
-    "@vue/tsconfig": "^0.8.1",
-    "rollup-plugin-dts": "^6.2.3",
-    "sass": "^1.93.3",
-    "sass-loader": "^16.0.6",
-    "typescript": "~5.9.3",
-    "vite": "npm:rolldown-vite@7.1.14",
+    "@types/node": "^25.5.0",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "@vue/tsconfig": "^0.9.1",
+    "rollup-plugin-dts": "^6.4.1",
+    "sass": "^1.98.0",
+    "sass-loader": "^16.0.7",
+    "typescript": "~6.0.2",
+    "vite": "8.0.3",
     "vite-plugin-dts": "^4.5.4",
-    "vue-tsc": "^3.1.0"
+    "vue-tsc": "^3.2.6"
   },
   "pnpm": {
     "overrides": {
-      "vite": "npm:rolldown-vite@7.1.14"
+      "vite": "8.0.3"
     },
     "ignoredBuiltDependencies": [
       "@parcel/watcher",

@@ -1,4 +1,4 @@
-import { langType } from "./lang";
+import type { langType } from "./lang";
 /**
  * @description: el-cron-config 面板
  * @author: fuxishi

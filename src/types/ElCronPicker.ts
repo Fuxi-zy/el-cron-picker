@@ -1,4 +1,4 @@
-import { VNode } from "vue";
+import type { VNode } from "vue";
 import type { langType } from "./lang";
 /**
  * @description: el-cron-picker 组件类型定义 ElCronPickerType
