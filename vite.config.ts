@@ -28,9 +28,11 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ["vue", "element-plus"],
+      checks: { pluginTimings: false },
       output: {
         globals: {
           vue: "Vue",
+          "element-plus": "ElementPlus",
         },
       },
     },
