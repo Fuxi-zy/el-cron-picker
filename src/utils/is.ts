@@ -1,3 +1,5 @@
+import { Cron } from "croner";
+
 const toString = Object.prototype.toString;
 
 /**
@@ -14,9 +16,12 @@ export const is = (val: unknown, type: string) => {
 };
 
 export const isCron = (str: string): boolean => {
-  const cronRegex =
-    /^\s*(?:#.*|(?:\?|\*|[0-5]?\d(?:[-/,][0-5]?\d)*)\s+(?:\?|\*|[0-5]?\d(?:[-/,][0-5]?\d)*)\s+(?:\?|\*|(?:[01]?\d|2[0-3])(?:[-/,](?:[01]?\d|2[0-3]))*)\s+(?:\?|\*|LW|(?:[12]\d|3[01]|0?[1-9])(?:W)?|L(?:W)?|(?:[12]\d|3[01]|0?[1-9])(?:[-/,](?:[12]\d|3[01]|0?[1-9]))*(?:W)?|L(?:[-/,]L)*(?:W)?)\s+(?:[?*]|(?:[1-9]|1[012])(?:[-/,](?:[1-9]|1[012]))*(?:,(?:[1-9]|1[012])(?:[-/,](?:[1-9]|1[012]))*)*|(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)(?:-(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC))?(?:,(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)(?:-(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC))?)*)\s+(?:[?*]|[0-7](?:[-/,#][0-7])?L?(?:,[0-7](?:[-/,#][0-7])?L?)*|(?:MON|TUE|WED|THU|FRI|SAT|SUN)(?:-(?:MON|TUE|WED|THU|FRI|SAT|SUN))?(?:,(?:MON|TUE|WED|THU|FRI|SAT|SUN)(?:-(?:MON|TUE|WED|THU|FRI|SAT|SUN))?)*)(?:\s+(?:\?|\*|(?:\d{4}(?:\/\d+)?)(?:[-/,](?:\d{4}(?:\/\d+)?))*)?)?)$/;
-  return cronRegex.test(str.trim());
+  try {
+    new Cron(str.trim());
+    return true;
+  } catch {
+    return false;
+  }
 };
 export function isSvg(val: string): boolean {
   return (

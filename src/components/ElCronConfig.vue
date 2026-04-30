@@ -503,22 +503,35 @@
     {{ language.ElCronConfig.RunTimesStart }}
     <el-input-number v-model="numberCount" :min="1" size="small" />
     {{ language.ElCronConfig.RunTimesEnd }}
-    <div style="max-height: 200px; overflow: auto; padding: 15px">
-      <el-tag
-        v-for="(time, index) in nextRunTimes"
-        :key="index"
-        size="small"
-        class="time-tag"
-      >
-        {{ time }}
-      </el-tag>
+    <div
+      ref="scrollContainer"
+      style="max-height: 200px; overflow: auto; padding: 15px"
+      @scroll="onScroll"
+    >
+      <div :style="{
+        paddingTop: `${paddingTop}px`,
+        paddingBottom: `${paddingBottom}px`,
+        display: 'grid',
+        gridTemplateColumns: `repeat(${estimatedPerRow}, max-content)`,
+        justifyContent: 'space-between',
+        gap: '5px',
+      }">
+        <el-tag
+          v-for="(time, index) in visibleItems"
+          :key="startIndex + index"
+          size="small"
+          disable-transitions
+        >
+          {{ time }}
+        </el-tag>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { dayjs, ElMessage } from "element-plus";
-import { reactive, computed, watch, onMounted, ref } from "vue";
+import { reactive, computed, watch, onMounted, onUnmounted, ref, shallowRef } from "vue";
 import { Cron } from "croner";
 import type { ElCronConfigProps } from "../types/ElCronConfig";
 import { copyClipboard } from "../utils/copyClipboard";
@@ -722,34 +735,89 @@ const cronExpression = computed(() => {
 const cronExpressionParts = computed(() => cronExpression.value.split(" "));
 
 // 计算最近运行时间
-const nextRunTimes = computed(() => {
-  if (!isCron(props.modelValue)) {
-    return [];
-  } else {
-    if (!cronExpression.value) return [];
-    try {
-      const job = new Cron(cronExpression.value.toString().trim(), {
-        domAndDow: true,
-        sloppyRanges: true,
-      });
-      const times = job
-        .nextRuns(props.numberCount)
-        .map((time) => dayjs(time).format("YYYY-MM-DD HH:mm:ss dddd"));
-      return times;
-    } catch (e) {
-      console.error("Invalid cron expression:", e);
-      emits("executionError", e);
-      if ((e as { message: string }).message.includes("W)")) {
-        ElMessage.error(
-          `${props.language.NotSupportedForNowW}, ${
-            (e as { message: string }).message
-          }`
-        );
-      }
-      return [];
-    }
+const nextRunTimes = shallowRef<string[]>([]);
+let _debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+// 虚拟滚动
+const scrollContainer = ref<HTMLElement>();
+const scrollTop = ref(0);
+const estimatedPerRow = ref(3);
+const TAG_W = 195; // tag 宽度 190 + gap 5
+const ROW_H = 33;  // tag 高度 28 + gap 5
+const BUFFER = 80;
+
+const itemH = computed(() => ROW_H / estimatedPerRow.value);
+
+const startIndex = computed(() =>
+  Math.max(0, Math.floor(scrollTop.value / itemH.value) - BUFFER)
+);
+const visibleCount = computed(() => {
+  const visible = Math.ceil(230 / itemH.value) + BUFFER * 2;
+  return Math.min(nextRunTimes.value.length - startIndex.value, visible);
+});
+const visibleItems = computed(() =>
+  nextRunTimes.value.slice(startIndex.value, startIndex.value + visibleCount.value)
+);
+const paddingTop = computed(() => startIndex.value * itemH.value);
+const paddingBottom = computed(() =>
+  Math.max(0, (nextRunTimes.value.length - startIndex.value - visibleCount.value) * itemH.value)
+);
+
+const onScroll = () => {
+  const el = scrollContainer.value;
+  if (el) scrollTop.value = el.scrollTop;
+};
+
+const updateLayout = () => {
+  const el = scrollContainer.value;
+  if (!el) return;
+  estimatedPerRow.value = Math.max(1, Math.floor((el.clientWidth - 30) / TAG_W));
+};
+
+let _resizeObserver: ResizeObserver | null = null;
+onMounted(() => {
+  updateLayout();
+  const el = scrollContainer.value;
+  if (el) {
+    _resizeObserver = new ResizeObserver(updateLayout);
+    _resizeObserver.observe(el);
   }
 });
+onUnmounted(() => _resizeObserver?.disconnect());
+watch(
+  [() => cronExpression.value, () => props.numberCount],
+  ([expr]) => {
+    if (_debounceTimer) clearTimeout(_debounceTimer);
+    if (!isCron(props.modelValue) || !expr) {
+      nextRunTimes.value = [];
+      scrollTop.value = 0;
+      if (scrollContainer.value) scrollContainer.value.scrollTop = 0;
+      return;
+    }
+    _debounceTimer = setTimeout(() => {
+      try {
+        const job = new Cron(expr.toString().trim(), {
+          domAndDow: true,
+        });
+        nextRunTimes.value = job
+          .nextRuns(props.numberCount)
+          .map((time) => dayjs(time).format("YYYY-MM-DD HH:mm:ss dddd"));
+      } catch (e) {
+        console.error("Invalid cron expression:", e);
+        emits("executionError", e);
+        if ((e as { message: string }).message.includes("W)")) {
+          ElMessage.error(
+            `${props.language.NotSupportedForNowW}, ${
+              (e as { message: string }).message
+            }`
+          );
+        }
+        nextRunTimes.value = [];
+      }
+    }, 150);
+  },
+  { immediate: true }
+);
 
 // 周映射表
 const weekMapToChinese = {
