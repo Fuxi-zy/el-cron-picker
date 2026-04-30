@@ -17,26 +17,26 @@ npm i @fuxishi/el-cron-picker
 ## 全局引入
 
 ```ts
-import { createApp } from "vue"
-import App from "./App.vue"
-import ElementPlus from "element-plus"
-import "element-plus/dist/index.css"
+import { createApp } from "vue";
+import App from "./App.vue";
+import ElementPlus from "element-plus";
+import "element-plus/dist/index.css";
 
 // 全局引入
-import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker"
-import "@fuxishi/el-cron-picker/dist/el-cron-picker.css"
+import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker";
+import "@fuxishi/el-cron-picker/dist/el-cron-picker.css";
 
-const app = createApp(App)
-app.use(ElementPlus)
-app.use(ElCronPicker)
-app.mount("#app")
+const app = createApp(App);
+app.use(ElementPlus);
+app.use(ElCronPicker);
+app.mount("#app");
 ```
 
 ## 局部引入
 
 ```ts
-import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker"
-import "@fuxishi/el-cron-picker/dist/el-cron-picker.css"
+import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker";
+import "@fuxishi/el-cron-picker/dist/el-cron-picker.css";
 ```
 
 ## 示例
@@ -49,11 +49,11 @@ import "@fuxishi/el-cron-picker/dist/el-cron-picker.css"
   <el-cron-config v-model="cron" v-model:numberCount="numberCount" />
 </template>
 <script setup lang="ts">
-  import { ref } from "vue"
-  import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker"
-  import "@fuxishi/el-cron-picker/dist/el-cron-picker.css"
-  const cron = ref("* * * * * ?")
-  const numberCount = ref(50)
+  import { ref } from "vue";
+  import { ElCronPicker, ElCronConfig } from "@fuxishi/el-cron-picker";
+  import "@fuxishi/el-cron-picker/dist/el-cron-picker.css";
+  const cron = ref("* * * * * ?");
+  const numberCount = ref(50);
 </script>
 ```
 
@@ -65,7 +65,7 @@ import "@fuxishi/el-cron-picker/dist/el-cron-picker.css"
 例如:
 
 ```ts
-import { zh } from "@fuxishi/el-cron-picker"
+import { zh } from "@fuxishi/el-cron-picker";
 ```
 
 也可自定义
@@ -142,10 +142,10 @@ import { zh } from "@fuxishi/el-cron-picker"
 <template>
   <!-- 使用 dialog 类型，带输入框 -->
   <el-cron-picker v-model="cron" type="dialog" />
-  
+
   <!-- 使用 drawer 类型，带输入框 -->
   <el-cron-picker v-model="cron" type="drawer" />
-  
+
   <!-- 禁止点击模态框关闭 -->
   <el-cron-picker v-model="cron" type="drawer" :close-on-click-modal="false" />
 </template>
@@ -169,7 +169,8 @@ import { zh } from "@fuxishi/el-cron-picker"
 | 1.0.6  | 修复周期情况下如果出现例如"MON-FRI"变为"NAN-NAN"问题, 解决如果是已经输入到周的时候无法继续输入空格或删除最后方空格 解决月份如果是如的是类似 JAN 转换为 NAN 的问题 ,修复周部分的第 n 周的星期 n 转换错误问题, 解决年部分用"\/"分割报错的情况 | 2025-11-06 |
 | 1.1.0  | 新增语言包配置                                                                                                                                                                                                                              | 2025-11-07 |
 | 1.1.1  | ①. 新增 executionError 执行错误事件 ②. isCron 正则校验增强 解决日参数 W LW L 错误返回 false 问题 ③. 最近运行事件计算方式如果 cron 表达式不满足条件自动清空最近运行                                                                          | 2025-11-10 |
-| 1.1.2  | ①. 修复 drawer 取消按钮无反应问题 ②. 新增 closeOnClickModal 参数控制是否允许点击模态框关闭弹窗/抽屉                                                                                                                                          | 2025-11-11 |
-| 1.1.3  | ①. 在 dialog/drawer 中添加可输入的 Cron 表达式输入框，与 v-model 双向绑定 ②. 更新语言包类型定义                                                                                                                                            | 2025-11-11 |
+| 1.1.2  | ①. 修复 drawer 取消按钮无反应问题 ②. 新增 closeOnClickModal 参数控制是否允许点击模态框关闭弹窗/抽屉                                                                                                                                         | 2025-11-11 |
+| 1.1.3  | ①. 在 dialog/drawer 中添加可输入的 Cron 表达式输入框，与 v-model 双向绑定 ②. 更新语言包类型定义                                                                                                                                             | 2025-11-11 |
+| 1.2.1  | ①. croner 移至 devDependencies，避免消费者重复安装 ②. isCron 验证改用 croner 原生解析器，确保验证与解析一致 ③. 移除 sloppyRanges，确保生成标准 cron 表达式 ④. nextRunTimes 添加防抖优化，监听 numberCount 变化 ⑤. 运行时间列表添加虚拟滚动，支持大数据量(10000+)流畅渲染 ⑥. 升级 vite 8.0.10、vue 3.5.33、element-plus 2.13.7 | 2026-04-30 |
 
 # 如遇到错误或什么问题 可邮箱zhangzjx1422@163.com联系
