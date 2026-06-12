@@ -531,7 +531,7 @@
 
 <script setup lang="ts">
 import { dayjs, ElMessage } from "element-plus";
-import { reactive, computed, watch, onMounted, onUnmounted, ref, shallowRef } from "vue";
+import { reactive, computed, watch, onMounted, onUnmounted, ref, shallowRef, nextTick } from "vue";
 import { Cron } from "croner";
 import type { ElCronConfigProps } from "../types/ElCronConfig";
 import { copyClipboard } from "../utils/copyClipboard";
@@ -1067,13 +1067,17 @@ onMounted(() => {
   }
 });
 
-// 新增监听 modelValue 变化
+// 标记是否为组件内部更新，防止 parseCron 循环触发
+let _selfUpdate = false;
+
+// 新增监听 modelValue 变化（仅外部变更时才解析）
 watch(
   () => props.modelValue,
   (newVal) => {
-    if (isCron(newVal)) {
+    if (!_selfUpdate && isCron(newVal)) {
       parseCron(newVal);
     }
+    _selfUpdate = false;
   }
 );
 
@@ -1099,7 +1103,14 @@ watch(
 watch(
   config,
   () => {
-    emits("update:modelValue", cronExpression.value);
+    const newExpr = cronExpression.value;
+    if (newExpr !== props.modelValue) {
+      _selfUpdate = true;
+      emits("update:modelValue", newExpr);
+      nextTick(() => {
+        _selfUpdate = false;
+      });
+    }
   },
   { deep: true }
 );

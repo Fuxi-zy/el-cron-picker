@@ -172,5 +172,6 @@ import { zh } from "@fuxishi/el-cron-picker";
 | 1.1.2  | ①. 修复 drawer 取消按钮无反应问题 ②. 新增 closeOnClickModal 参数控制是否允许点击模态框关闭弹窗/抽屉                                                                                                                                         | 2025-11-11 |
 | 1.1.3  | ①. 在 dialog/drawer 中添加可输入的 Cron 表达式输入框，与 v-model 双向绑定 ②. 更新语言包类型定义                                                                                                                                             | 2025-11-11 |
 | 1.2.1  | ①. croner 移至 devDependencies，避免消费者重复安装 ②. isCron 验证改用 croner 原生解析器，确保验证与解析一致 ③. 移除 sloppyRanges，确保生成标准 cron 表达式 ④. nextRunTimes 添加防抖优化，监听 numberCount 变化 ⑤. 运行时间列表添加虚拟滚动，支持大数据量(10000+)流畅渲染 ⑥. 升级 vite 8.0.10、vue 3.5.33、element-plus 2.13.7 | 2026-04-30 |
+| 1.2.2  | 修复选择"指定"选项时未选择值，切换其他选项后再切回"指定"，单选按钮跳回"每"的问题                                                                                                                                                          | 2026-06-12 |
 
 # 如遇到错误或什么问题 可邮箱zhangzjx1422@163.com联系

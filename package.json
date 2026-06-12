@@ -1,6 +1,6 @@
 {
   "name": "@fuxishi/el-cron-picker",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "MIT",
   "description": "vue3 element-plus cron表达式生成器",
   "publishConfig": {
@@ -14,7 +14,7 @@
     "url": "https://github.com/Fuxi-zy/el-cron-picker"
   },
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --host --port 5177",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "ncu": "ncu -u && npm install",
@@ -34,25 +34,25 @@
   ],
   "type": "module",
   "dependencies": {
-    "element-plus": "^2.13.7",
-    "vue": "^3.5.33"
+    "element-plus": "^2.14.2",
+    "vue": "^3.5.38"
   },
   "devDependencies": {
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.9.3",
     "croner": "^10.0.1",
-    "@vitejs/plugin-vue": "^6.0.6",
+    "@vitejs/plugin-vue": "^6.0.7",
     "@vue/tsconfig": "^0.9.1",
     "rollup-plugin-dts": "^6.4.1",
-    "sass": "^1.99.0",
-    "sass-loader": "^16.0.7",
+    "sass": "^1.101.0",
+    "sass-loader": "^17.0.0",
     "typescript": "~6.0.3",
-    "vite": "8.0.10",
-    "vite-plugin-dts": "^4.5.4",
-    "vue-tsc": "^3.2.7"
+    "vite": "8.0.16",
+    "vite-plugin-dts": "^5.0.2",
+    "vue-tsc": "^3.3.4"
   },
   "pnpm": {
     "overrides": {
-      "vite": "8.0.10"
+      "vite": "8.0.16"
     },
     "ignoredBuiltDependencies": [
       "@parcel/watcher",
